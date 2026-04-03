@@ -30,9 +30,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   AuthNotifier(this._api) : super(const AuthState());
 
-  /// Request notification permission and register device token with backend
+  /// Register the current device token with the backend after login.
   Future<void> _registerPush() async {
-    await PushNotificationService.requestPermission();
     await PushNotificationService.registerDeviceToken(_api);
     PushNotificationService.listenTokenRefresh(_api);
   }

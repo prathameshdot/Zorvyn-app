@@ -6,6 +6,7 @@ import 'package:zorvyn/config/theme.dart';
 import 'package:zorvyn/providers/auth_provider.dart';
 import 'package:zorvyn/providers/dashboard_provider.dart';
 import 'package:zorvyn/providers/transaction_provider.dart';
+import 'package:zorvyn/widgets/brand_logo.dart';
 import 'package:zorvyn/widgets/common_widgets.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -51,6 +52,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const BrandLogo(size: 48),
+                        const SizedBox(height: 10),
                         Text(
                           'Hello, ${auth.user?.name ?? 'there'}!',
                           style: const TextStyle(

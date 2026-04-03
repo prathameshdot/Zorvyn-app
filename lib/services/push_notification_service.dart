@@ -54,22 +54,26 @@ class PushNotificationService {
 
   /// Request notification permission on Android 13+ and iOS
   static Future<bool> requestPermission() async {
-    // Use permission_handler for Android 13+ POST_NOTIFICATIONS
-    if (Platform.isAndroid) {
-      final status = await Permission.notification.request();
-      if (!status.isGranted) return false;
+    if (!Platform.isAndroid && !Platform.isIOS) return true;
+
+    try {
+      if (Platform.isAndroid) {
+        final status = await Permission.notification.request();
+        if (!status.isGranted) return false;
+      }
+
+      final settings = await _messaging.requestPermission(
+        alert: true,
+        badge: true,
+        sound: true,
+        provisional: false,
+      );
+
+      return settings.authorizationStatus == AuthorizationStatus.authorized ||
+          settings.authorizationStatus == AuthorizationStatus.provisional;
+    } catch (_) {
+      return false;
     }
-
-    // Ask Firebase (covers iOS + returns status)
-    final settings = await _messaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-      provisional: false,
-    );
-
-    return settings.authorizationStatus == AuthorizationStatus.authorized ||
-        settings.authorizationStatus == AuthorizationStatus.provisional;
   }
 
   /// Get current FCM token

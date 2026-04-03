@@ -3,6 +3,7 @@ import 'package:zorvyn/config/constants.dart';
 
 class LocalStorageService {
   static late SharedPreferences _prefs;
+  static const _notificationPromptKey = 'notification_prompted';
 
   static Future<void> initialize() async {
     _prefs = await SharedPreferences.getInstance();
@@ -28,6 +29,13 @@ class LocalStorageService {
 
   static Future<void> setOnboardingDone() async {
     await _prefs.setBool('onboarding_done', true);
+  }
+
+  static bool getNotificationPrompted() =>
+      _prefs.getBool(_notificationPromptKey) ?? false;
+
+  static Future<void> setNotificationPrompted() async {
+    await _prefs.setBool(_notificationPromptKey, true);
   }
 
   static Future<void> clearAll() async {

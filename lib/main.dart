@@ -11,12 +11,31 @@ import 'package:zorvyn/services/push_notification_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await LocalStorageService.initialize();
-  await DatabaseService.initialize();
-  await ConnectivityService.initialize();
-  await Firebase.initializeApp();
-  await PushNotificationService.initialize();
+  await _initializeServices();
   runApp(const ProviderScope(child: ZorvynApp()));
+}
+
+Future<void> _initializeServices() async {
+  await _runStartupTask('local storage', LocalStorageService.initialize);
+  await _runStartupTask('database', DatabaseService.initialize);
+  await _runStartupTask('connectivity', ConnectivityService.initialize);
+  await _runStartupTask('firebase', () async {
+    await Firebase.initializeApp();
+    await PushNotificationService.initialize();
+  });
+}
+
+Future<void> _runStartupTask(
+  String label,
+  Future<void> Function() task,
+) async {
+  try {
+    await task();
+  } catch (error, stackTrace) {
+    debugPrint('Startup task failed: $label');
+    debugPrint(error.toString());
+    debugPrintStack(stackTrace: stackTrace);
+  }
 }
 
 class ZorvynApp extends ConsumerWidget {
