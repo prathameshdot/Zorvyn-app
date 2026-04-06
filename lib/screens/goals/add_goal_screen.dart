@@ -95,7 +95,7 @@ class _AddGoalScreenState extends ConsumerState<AddGoalScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(title: Text(_isEdit ? 'Edit Goal' : 'Add Goal')),
       body: LoadingOverlay(
         isLoading: _isLoading,
@@ -139,21 +139,21 @@ class _AddGoalScreenState extends ConsumerState<AddGoalScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                     child: Row(
                       children: [
-                        const Icon(CupertinoIcons.tag, size: 20, color: AppTheme.textHint),
+                        Icon(CupertinoIcons.tag, size: 20, color: AppTheme.textHintC(context)),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Goal Type', style: TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                              Text('Goal Type', style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                               Text(
                                 _goalType.replaceAll('_', ' ')[0].toUpperCase() + _goalType.replaceAll('_', ' ').substring(1),
-                                style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimary),
+                                style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context)),
                               ),
                             ],
                           ),
                         ),
-                        const Icon(CupertinoIcons.chevron_down, size: 16, color: AppTheme.textHint),
+                        Icon(CupertinoIcons.chevron_down, size: 16, color: AppTheme.textHintC(context)),
                       ],
                     ),
                   ),
@@ -182,15 +182,15 @@ class _AddGoalScreenState extends ConsumerState<AddGoalScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Priority', style: TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                              Text('Priority', style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                               Text(
                                 _priority[0].toUpperCase() + _priority.substring(1),
-                                style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimary),
+                                style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context)),
                               ),
                             ],
                           ),
                         ),
-                        const Icon(CupertinoIcons.chevron_down, size: 16, color: AppTheme.textHint),
+                        Icon(CupertinoIcons.chevron_down, size: 16, color: AppTheme.textHintC(context)),
                       ],
                     ),
                   ),
@@ -209,15 +209,15 @@ class _AddGoalScreenState extends ConsumerState<AddGoalScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                     child: Row(
                       children: [
-                        const Icon(CupertinoIcons.calendar, size: 20, color: AppTheme.textHint),
+                        Icon(CupertinoIcons.calendar, size: 20, color: AppTheme.textHintC(context)),
                         const SizedBox(width: 12),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Deadline (optional)', style: TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                            Text('Deadline (optional)', style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                             Text(
                               _deadline != null ? DateFormat('MMM dd, yyyy').format(_deadline!) : 'Not set',
-                              style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimary),
+                              style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context)),
                             ),
                           ],
                         ),

@@ -7,7 +7,7 @@ class PrivacyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(title: const Text('Privacy Policy')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -119,7 +119,7 @@ class _Heading extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.only(bottom: 8),
-    child: Text(text, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+    child: Text(text, style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: AppTheme.textPrimaryC(context))),
   );
 }
 
@@ -129,7 +129,7 @@ class _SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.only(bottom: 8),
-    child: Text(text, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+    child: Text(text, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context))),
   );
 }
 
@@ -139,6 +139,6 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     text,
-    style: const TextStyle(fontSize: 14, color: AppTheme.textSecondary, height: 1.6),
+    style: TextStyle(fontSize: 14, color: AppTheme.textSecondaryC(context), height: 1.6),
   );
 }

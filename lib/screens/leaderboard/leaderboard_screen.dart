@@ -14,7 +14,7 @@ class LeaderboardScreen extends ConsumerWidget {
     final myRank = ref.watch(myRankProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(title: const Text('Leaderboard')),
       body: leaderboard.when(
         loading: () => const Center(child: CupertinoActivityIndicator()),
@@ -57,7 +57,7 @@ class LeaderboardScreen extends ConsumerWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Your Rank', style: TextStyle(color: AppTheme.textSecondary, fontSize: 13)),
+                                Text('Your Rank', style: TextStyle(color: AppTheme.textSecondaryC(context), fontSize: 13)),
                                 Text('#$rank', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: AppTheme.primary)),
                               ],
                             ),
@@ -65,8 +65,8 @@ class LeaderboardScreen extends ConsumerWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              const Text('Score', style: TextStyle(color: AppTheme.textSecondary, fontSize: 13)),
-                              Text('$score XP', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+                              Text('Score', style: TextStyle(color: AppTheme.textSecondaryC(context), fontSize: 13)),
+                              Text('$score XP', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimaryC(context))),
                             ],
                           ),
                         ],
@@ -108,7 +108,7 @@ class LeaderboardScreen extends ConsumerWidget {
                             width: 32,
                             child: Text(
                               '#$rank',
-                              style: const TextStyle(fontWeight: FontWeight.w700, color: AppTheme.textSecondary),
+                              style: TextStyle(fontWeight: FontWeight.w700, color: AppTheme.textSecondaryC(context)),
                             ),
                           ),
                           const SizedBox(width: 8),
@@ -127,9 +127,9 @@ class LeaderboardScreen extends ConsumerWidget {
                           ),
                           const SizedBox(width: 12),
                           Expanded(
-                            child: Text(e.name, style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+                            child: Text(e.name, style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context))),
                           ),
-                          Text('${e.score} XP', style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
+                          Text('${e.score} XP', style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textSecondaryC(context))),
                         ],
                       ),
                     ),
@@ -176,9 +176,9 @@ class _PodiumCard extends StatelessWidget {
             entry.name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: AppTheme.textPrimary),
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: AppTheme.textPrimaryC(context)),
           ),
-          Text('${entry.score} XP', style: const TextStyle(fontSize: 11, color: AppTheme.textHint)),
+          Text('${entry.score} XP', style: TextStyle(fontSize: 11, color: AppTheme.textHintC(context))),
           const SizedBox(height: 6),
           Container(
             width: double.infinity,

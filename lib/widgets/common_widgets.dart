@@ -30,10 +30,11 @@ class ClayCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = AppTheme.isDark(context);
     final card = Container(
       padding: padding ?? const EdgeInsets.all(16),
       margin: margin,
-      decoration: AppTheme.clayCard(color: color ?? AppTheme.surface, radius: radius),
+      decoration: AppTheme.clayCard(color: color ?? AppTheme.surfaceC(context), radius: radius, isDark: dark),
       child: child,
     );
     if (onTap != null) {
@@ -192,10 +193,10 @@ class ClayTextField extends StatelessWidget {
             padding: const EdgeInsets.only(left: 4, bottom: 8),
             child: Text(
               labelText!,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
-                color: AppTheme.textPrimary,
+                color: AppTheme.textPrimaryC(context),
               ),
             ),
           ),
@@ -209,11 +210,11 @@ class ClayTextField extends StatelessWidget {
             maxLines: maxLines,
             readOnly: readOnly,
             onTap: onTap,
-            style: const TextStyle(fontSize: 15, color: AppTheme.textPrimary),
+            style: TextStyle(fontSize: 15, color: AppTheme.textPrimaryC(context)),
             decoration: InputDecoration(
               hintText: hintText,
               prefixIcon: prefixIcon != null
-                  ? Icon(prefixIcon, color: AppTheme.textHint, size: 20)
+                  ? Icon(prefixIcon, color: AppTheme.textHintC(context), size: 20)
                   : null,
               suffixIcon: suffix,
               filled: true,
@@ -281,14 +282,14 @@ class EmptyState extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(24),
-              decoration: AppTheme.clayCard(color: AppTheme.bg),
-              child: Icon(icon, size: 48, color: AppTheme.textHint),
+              decoration: AppTheme.clayCard(color: AppTheme.bgC(context)),
+              child: Icon(icon, size: 48, color: AppTheme.textHintC(context)),
             ),
             const SizedBox(height: 20),
-            Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+            Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context))),
             if (subtitle != null) ...[
               const SizedBox(height: 8),
-              Text(subtitle!, textAlign: TextAlign.center, style: const TextStyle(color: AppTheme.textSecondary)),
+              Text(subtitle!, textAlign: TextAlign.center, style: TextStyle(color: AppTheme.textSecondaryC(context))),
             ],
             if (buttonText != null && onButtonPressed != null) ...[
               const SizedBox(height: 24),
@@ -318,11 +319,11 @@ class ErrorDisplay extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(20),
-              decoration: AppTheme.clayCard(color: AppTheme.bg),
+              decoration: AppTheme.clayCard(color: AppTheme.bgC(context)),
               child: const Icon(CupertinoIcons.exclamationmark_triangle, size: 40, color: AppTheme.warning),
             ),
             const SizedBox(height: 16),
-            Text(message, textAlign: TextAlign.center, style: const TextStyle(color: AppTheme.textSecondary)),
+            Text(message, textAlign: TextAlign.center, style: TextStyle(color: AppTheme.textSecondaryC(context))),
             if (onRetry != null) ...[
               const SizedBox(height: 16),
               CupertinoButton(
@@ -352,7 +353,7 @@ class SectionHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+          Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context))),
           if (actionText != null)
             CupertinoButton(
               padding: EdgeInsets.zero,
@@ -409,7 +410,7 @@ void showCupertinoPicker({
                 final display = item.replaceAll('_', ' ');
                 return Center(
                   child: Text(
-                    display[0].toUpperCase() + display.substring(1),
+                    display.isEmpty ? '' : display[0].toUpperCase() + display.substring(1),
                     style: const TextStyle(fontSize: 18),
                   ),
                 );
@@ -615,5 +616,26 @@ Color getCategoryColor(String category) {
       return const Color(0xFF95A5A6);
     default:
       return const Color(0xFFBDC3C7);
+  }
+}
+
+/// Skeleton loading card — simple shimmer placeholder
+class SkeletonCard extends StatelessWidget {
+  final double? height;
+  final double? width;
+
+  const SkeletonCard({super.key, this.height, this.width});
+
+  @override
+  Widget build(BuildContext context) {
+    final dark = AppTheme.isDark(context);
+    return Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+        color: dark ? AppTheme.surfaceAltDark : AppTheme.dividerC(context),
+        borderRadius: BorderRadius.circular(16),
+      ),
+    );
   }
 }

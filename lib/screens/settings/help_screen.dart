@@ -10,7 +10,7 @@ class HelpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(title: const Text('Help & Support')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -34,15 +34,15 @@ class HelpScreen extends StatelessWidget {
                     child: const Icon(CupertinoIcons.question_circle_fill, size: 36, color: AppTheme.primary),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  Text(
                     'How can we help?',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: AppTheme.textPrimary),
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: AppTheme.textPrimaryC(context)),
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Find answers or reach out to our support team.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14, color: AppTheme.textSecondary),
+                    style: TextStyle(fontSize: 14, color: AppTheme.textSecondaryC(context)),
                   ),
                 ],
               ),
@@ -50,9 +50,9 @@ class HelpScreen extends StatelessWidget {
             const SizedBox(height: 24),
 
             // Quick links
-            const Text(
+            Text(
               'Quick Links',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimary),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context)),
             ),
             const SizedBox(height: 12),
             _HelpTile(
@@ -78,9 +78,9 @@ class HelpScreen extends StatelessWidget {
             const SizedBox(height: 24),
 
             // Contact
-            const Text(
+            Text(
               'Contact Us',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimary),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context)),
             ),
             const SizedBox(height: 12),
             ClayCard(
@@ -92,13 +92,13 @@ class HelpScreen extends StatelessWidget {
                     label: 'Email Support',
                     value: 'help@zorvyn.app',
                   ),
-                  const Divider(height: 24, color: AppTheme.divider),
+                  Divider(height: 24, color: AppTheme.dividerC(context)),
                   _ContactRow(
                     icon: CupertinoIcons.clock,
                     label: 'Response Time',
                     value: 'Within 24 hours',
                   ),
-                  const Divider(height: 24, color: AppTheme.divider),
+                  Divider(height: 24, color: AppTheme.dividerC(context)),
                   _ContactRow(
                     icon: CupertinoIcons.globe,
                     label: 'Website',
@@ -110,9 +110,9 @@ class HelpScreen extends StatelessWidget {
             const SizedBox(height: 24),
 
             // Tips
-            const Text(
+            Text(
               'Quick Tips',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimary),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context)),
             ),
             const SizedBox(height: 12),
             ClayCard(
@@ -137,12 +137,12 @@ class HelpScreen extends StatelessWidget {
             // App info
             Center(
               child: Column(
-                children: const [
-                  Text('Zorvyn', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+                children: [
+                  Text('Zorvyn', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context))),
                   SizedBox(height: 4),
-                  Text('Version 1.0.0', style: TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                  Text('Version 1.0.0', style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                   SizedBox(height: 2),
-                  Text('Personal Finance Companion', style: TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                  Text('Personal Finance Companion', style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                 ],
               ),
             ),
@@ -182,12 +182,12 @@ class _HelpTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
-                Text(subtitle, style: const TextStyle(fontSize: 12, color: AppTheme.textSecondary)),
+                Text(title, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context))),
+                Text(subtitle, style: TextStyle(fontSize: 12, color: AppTheme.textSecondaryC(context))),
               ],
             ),
           ),
-          const Icon(CupertinoIcons.chevron_right, size: 16, color: AppTheme.textHint),
+          Icon(CupertinoIcons.chevron_right, size: 16, color: AppTheme.textHintC(context)),
         ],
       ),
     );
@@ -210,8 +210,8 @@ class _ContactRow extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label, style: const TextStyle(fontSize: 12, color: AppTheme.textHint)),
-              Text(value, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppTheme.textPrimary)),
+              Text(label, style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
+              Text(value, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppTheme.textPrimaryC(context))),
             ],
           ),
         ),
@@ -234,7 +234,7 @@ class _TipRow extends StatelessWidget {
           child: Icon(CupertinoIcons.lightbulb, size: 16, color: AppTheme.warning),
         ),
         const SizedBox(width: 10),
-        Expanded(child: Text(text, style: const TextStyle(fontSize: 13, color: AppTheme.textSecondary, height: 1.4))),
+        Expanded(child: Text(text, style: TextStyle(fontSize: 13, color: AppTheme.textSecondaryC(context), height: 1.4))),
       ],
     );
   }

@@ -36,25 +36,35 @@ import 'package:zorvyn/screens/ai/ai_insights_screen.dart';
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
+/// Bridges Riverpod [AuthState] changes into a [ChangeNotifier] that
+/// GoRouter can listen to via [refreshListenable].
+class _AuthNotifier extends ChangeNotifier {
+  _AuthNotifier(Ref ref) {
+    ref.listen<AuthState>(authNotifierProvider, (prev, next) => notifyListeners());
+  }
+}
+
 final routerProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(authStateProvider);
+  final authNotifier = _AuthNotifier(ref);
 
   return GoRouter(
     navigatorKey: _rootNavigatorKey,
     initialLocation: '/',
+    refreshListenable: authNotifier,
     redirect: (context, state) {
+      final authState = ref.read(authNotifierProvider);
       final isLoggedIn = authState.token != null;
       final isAuthRoute = state.matchedLocation == '/login' ||
           state.matchedLocation == '/register' ||
           state.matchedLocation == '/forgot-password' ||
           state.matchedLocation == '/reset-password' ||
-          state.matchedLocation == '/onboarding' ||
-          state.matchedLocation == '/';
+          state.matchedLocation == '/onboarding';
+      final isSplash = state.matchedLocation == '/';
 
-      if (!isLoggedIn && !isAuthRoute) return '/login';
-      if (isLoggedIn && isAuthRoute && state.matchedLocation != '/') {
-        return '/home';
-      }
+      // Not logged in → force to login (except auth routes & splash)
+      if (!isLoggedIn && !isAuthRoute && !isSplash) return '/login';
+      // Logged in → redirect away from auth routes to home
+      if (isLoggedIn && (isAuthRoute || isSplash)) return '/home';
       return null;
     },
     routes: [

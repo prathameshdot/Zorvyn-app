@@ -40,7 +40,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
     final token = LocalStorageService.getToken();
     if (token == null) return;
 
-    state = state.copyWith(token: token, isLoading: true);
+    try {
+      state = state.copyWith(token: token, isLoading: true);
+    } catch (_) {
+      // Notifier may not be mounted yet; skip the loading flag.
+    }
     try {
       final res = await _api.get('/auth/me');
       final user = User.fromJson(res['user'] ?? res);
@@ -104,7 +108,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<String?> forgotPassword(String email) async {
     try {
       final res = await _api.post('/auth/forgot-password', data: {'email': email});
-      return res['resetToken']?.toString();
+      return res['resetCode']?.toString();
     } on AppException catch (e) {
       return 'ERROR:${e.message}';
     } catch (_) {

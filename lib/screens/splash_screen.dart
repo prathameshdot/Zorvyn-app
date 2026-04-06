@@ -23,7 +23,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _prepareLaunch();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _prepareLaunch());
   }
 
   Future<void> _prepareLaunch() async {
@@ -82,7 +82,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      backgroundColor: isDark ? AppTheme.bgDark : AppTheme.bg,
+      backgroundColor: isDark ? AppTheme.bgDark : AppTheme.bgC(context),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 28),
@@ -92,7 +92,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: AppTheme.clayCard(
-                  color: isDark ? AppTheme.surfaceDark : AppTheme.surface,
+                  color: isDark ? AppTheme.surfaceDark : AppTheme.surfaceC(context),
                   radius: 28,
                   isDark: isDark,
                 ),
@@ -119,7 +119,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                   width: double.infinity,
                   padding: const EdgeInsets.all(18),
                   decoration: AppTheme.clayCard(
-                    color: isDark ? AppTheme.surfaceDark : AppTheme.surface,
+                    color: isDark ? AppTheme.surfaceDark : AppTheme.surfaceC(context),
                     radius: 22,
                     isDark: isDark,
                   ),

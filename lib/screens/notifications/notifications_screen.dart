@@ -24,7 +24,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
     final state = ref.watch(notificationNotifierProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(
         title: const Text('Notifications'),
         actions: [
@@ -87,14 +87,14 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                                       padding: const EdgeInsets.all(8),
                                       decoration: BoxDecoration(
                                         color: notif.read
-                                            ? AppTheme.divider
+                                            ? AppTheme.dividerC(context)
                                             : AppTheme.primary.withValues(alpha: 0.12),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Icon(
                                         CupertinoIcons.bell_fill,
                                         size: 18,
-                                        color: notif.read ? AppTheme.textHint : AppTheme.primary,
+                                        color: notif.read ? AppTheme.textHintC(context) : AppTheme.primary,
                                       ),
                                     ),
                                     const SizedBox(width: 14),
@@ -107,13 +107,13 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                                             style: TextStyle(
                                               fontWeight: notif.read ? FontWeight.w500 : FontWeight.w700,
                                               fontSize: 15,
-                                              color: AppTheme.textPrimary,
+                                              color: AppTheme.textPrimaryC(context),
                                             ),
                                           ),
                                           const SizedBox(height: 4),
                                           Text(
                                             notif.message,
-                                            style: const TextStyle(fontSize: 13, color: AppTheme.textSecondary),
+                                            style: TextStyle(fontSize: 13, color: AppTheme.textSecondaryC(context)),
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                           ),
@@ -121,7 +121,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                                             const SizedBox(height: 4),
                                             Text(
                                               notif.createdAt!.split('T').first,
-                                              style: const TextStyle(fontSize: 11, color: AppTheme.textHint),
+                                              style: TextStyle(fontSize: 11, color: AppTheme.textHintC(context)),
                                             ),
                                           ],
                                         ],

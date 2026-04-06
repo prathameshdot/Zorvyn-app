@@ -1,0 +1,1 @@
+﻿{"success":true,"statusCode":200,"message":"Budget summary retrieved successfully","data":{"totalBudget":0,"totalSpent":0,"budgets":[],"exceedingBudgets":[],"warningBudgets":[],"count":0}}

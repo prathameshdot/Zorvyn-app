@@ -83,7 +83,7 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(title: Text(_isEdit ? 'Edit Budget' : 'Add Budget')),
       body: LoadingOverlay(
         isLoading: _isLoading,
@@ -111,15 +111,15 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Category', style: TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                              Text('Category', style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                               Text(
                                 _category[0].toUpperCase() + _category.substring(1),
-                                style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimary),
+                                style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context)),
                               ),
                             ],
                           ),
                         ),
-                        const Icon(CupertinoIcons.chevron_down, size: 16, color: AppTheme.textHint),
+                        Icon(CupertinoIcons.chevron_down, size: 16, color: AppTheme.textHintC(context)),
                       ],
                     ),
                   ),
@@ -151,21 +151,21 @@ class _AddBudgetScreenState extends ConsumerState<AddBudgetScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                     child: Row(
                       children: [
-                        const Icon(CupertinoIcons.time, size: 20, color: AppTheme.textHint),
+                        Icon(CupertinoIcons.time, size: 20, color: AppTheme.textHintC(context)),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Period', style: TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                              Text('Period', style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                               Text(
                                 _period[0].toUpperCase() + _period.substring(1),
-                                style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimary),
+                                style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context)),
                               ),
                             ],
                           ),
                         ),
-                        const Icon(CupertinoIcons.chevron_down, size: 16, color: AppTheme.textHint),
+                        Icon(CupertinoIcons.chevron_down, size: 16, color: AppTheme.textHintC(context)),
                       ],
                     ),
                   ),

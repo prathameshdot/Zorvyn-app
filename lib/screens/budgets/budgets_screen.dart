@@ -25,7 +25,7 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
     final state = ref.watch(budgetNotifierProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(
         title: const Text('Budgets'),
         actions: [
@@ -77,10 +77,10 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              budget.category[0].toUpperCase() + budget.category.substring(1),
-                                              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppTheme.textPrimary),
+                                              budget.category.isEmpty ? 'Uncategorized' : budget.category[0].toUpperCase() + budget.category.substring(1),
+                                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppTheme.textPrimaryC(context)),
                                             ),
-                                            Text(budget.period, style: const TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                                            Text(budget.period, style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                                           ],
                                         ),
                                       ),
@@ -89,7 +89,7 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
                                         padding: EdgeInsets.zero,
                                         minimumSize: const Size.square(24),
                                         onPressed: () => context.go('/budgets/edit/${budget.id}'),
-                                        child: const Icon(CupertinoIcons.pencil, size: 18, color: AppTheme.textHint),
+                                        child: Icon(CupertinoIcons.pencil, size: 18, color: AppTheme.textHintC(context)),
                                       ),
                                       const SizedBox(width: 4),
                                       CupertinoButton(
@@ -119,7 +119,7 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
                                     borderRadius: BorderRadius.circular(6),
                                     child: LinearProgressIndicator(
                                       value: budget.usage.clamp(0.0, 1.0),
-                                      backgroundColor: AppTheme.divider,
+                                      backgroundColor: AppTheme.dividerC(context),
                                       color: budget.isOverBudget ? AppTheme.accent : AppTheme.success,
                                       minHeight: 8,
                                     ),
@@ -130,7 +130,7 @@ class _BudgetsScreenState extends ConsumerState<BudgetsScreen> {
                                     children: [
                                       Text(
                                         '${formatAmount(budget.spentAmount)} / ${formatAmount(budget.limitAmount)}',
-                                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: AppTheme.textSecondary),
+                                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: AppTheme.textSecondaryC(context)),
                                       ),
                                       Text(
                                         budget.isOverBudget ? 'Over budget!' : '${formatAmount(budget.remaining)} left',

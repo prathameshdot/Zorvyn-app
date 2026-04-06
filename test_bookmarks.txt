@@ -1,0 +1,1 @@
+﻿{"success":true,"statusCode":200,"message":"Bookmarked tips retrieved","data":[]}

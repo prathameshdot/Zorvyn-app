@@ -1,0 +1,1 @@
+﻿{"success":true,"statusCode":200,"message":"Insights retrieved successfully","data":{"period":"month","summary":{"income":{"total":0,"count":0},"expense":0,"net":null},"topExpenses":[],"categoryBreakdown":[],"budgetStatus":{"totalBudget":0,"totalSpent":0,"exceedingCount":0,"warningCount":0},"goalsProgress":{"total":0,"active":0,"completed":0,"averageProgress":0}}}

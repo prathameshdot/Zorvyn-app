@@ -38,15 +38,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     setState(() => _loading = false);
     if (error != null) {
       showAppSnackBar(context, error, isError: true);
-    } else {
-      context.go('/home');
     }
+    // Router redirect handles navigation to /home on auth state change
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -59,17 +58,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Center(
                   child: Container(
                     padding: const EdgeInsets.all(20),
-                    decoration: AppTheme.clayCard(color: AppTheme.surface),
+                    decoration: AppTheme.clayCard(color: AppTheme.surfaceC(context)),
                     child: const Icon(CupertinoIcons.chart_pie, size: 44, color: AppTheme.primary),
                   ),
                 ),
                 const SizedBox(height: 32),
-                const Center(
-                  child: Text('Welcome Back', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+                Center(
+                  child: Text('Welcome Back', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: AppTheme.textPrimaryC(context))),
                 ),
                 const SizedBox(height: 8),
-                const Center(
-                  child: Text('Sign in to continue', style: TextStyle(color: AppTheme.textSecondary)),
+                Center(
+                  child: Text('Sign in to continue', style: TextStyle(color: AppTheme.textSecondaryC(context))),
                 ),
                 const SizedBox(height: 40),
                 ClayTextField(
@@ -91,7 +90,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     onTap: () => setState(() => _obscure = !_obscure),
                     child: Icon(
                       _obscure ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
-                      color: AppTheme.textHint,
+                      color: AppTheme.textHintC(context),
                       size: 20,
                     ),
                   ),
@@ -117,7 +116,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account? ", style: TextStyle(color: AppTheme.textSecondary)),
+                    Text("Don't have an account? ", style: TextStyle(color: AppTheme.textSecondaryC(context))),
                     CupertinoButton(
                       padding: EdgeInsets.zero,
                       minimumSize: Size.zero,

@@ -55,6 +55,24 @@ class AppTheme {
   static const Color cardShadowLightDark = Color(0xFF0A0A10);
   static const Color cardShadowDarkDark = Color(0xFF000000);
 
+  // ── Context-aware colour resolvers (use in build methods) ──
+  static bool isDark(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark;
+
+  static Color bgC(BuildContext context) => isDark(context) ? bgDark : bg;
+  static Color surfaceC(BuildContext context) =>
+      isDark(context) ? surfaceDark : surface;
+  static Color surfaceAltC(BuildContext context) =>
+      isDark(context) ? surfaceAltDark : surfaceAlt;
+  static Color textPrimaryC(BuildContext context) =>
+      isDark(context) ? textPrimaryDark : textPrimary;
+  static Color textSecondaryC(BuildContext context) =>
+      isDark(context) ? textSecondaryDark : textSecondary;
+  static Color textHintC(BuildContext context) =>
+      isDark(context) ? textHintDark : textHint;
+  static Color dividerC(BuildContext context) =>
+      isDark(context) ? dividerDark : divider;
+
   static ThemeData get lightTheme => _buildTheme(Brightness.light);
   static ThemeData get darkTheme => _buildTheme(Brightness.dark);
 

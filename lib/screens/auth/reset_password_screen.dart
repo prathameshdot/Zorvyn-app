@@ -53,7 +53,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -64,12 +64,12 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
               CupertinoButton(
                 padding: EdgeInsets.zero,
                 onPressed: () => context.pop(),
-                child: const Icon(CupertinoIcons.back, color: AppTheme.textPrimary),
+                child: Icon(CupertinoIcons.back, color: AppTheme.textPrimaryC(context)),
               ),
               const SizedBox(height: 32),
-              const Text('Reset Password', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+              Text('Reset Password', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: AppTheme.textPrimaryC(context))),
               const SizedBox(height: 8),
-              const Text('Enter your new password.', style: TextStyle(color: AppTheme.textSecondary)),
+              Text('Enter your new password.', style: TextStyle(color: AppTheme.textSecondaryC(context))),
               const SizedBox(height: 40),
               ClayTextField(
                 controller: _passwordCtrl,

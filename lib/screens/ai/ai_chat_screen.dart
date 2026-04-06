@@ -61,7 +61,7 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
     if (chatState.messages.isNotEmpty) _scrollToBottom();
 
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(
         title: const Text('AI Advisor'),
       ),
@@ -76,19 +76,19 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
                       children: [
                         Container(
                           padding: const EdgeInsets.all(24),
-                          decoration: AppTheme.clayCard(color: AppTheme.bg),
-                          child: const Icon(CupertinoIcons.chat_bubble_2, size: 48, color: AppTheme.textHint),
+                          decoration: AppTheme.clayCard(color: AppTheme.bgC(context)),
+                          child: Icon(CupertinoIcons.chat_bubble_2, size: 48, color: AppTheme.textHintC(context)),
                         ),
                         const SizedBox(height: 16),
-                        const Text(
+                        Text(
                           'Ask me about your finances',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textSecondary),
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textSecondaryC(context)),
                         ),
                         const SizedBox(height: 8),
-                        const Text(
+                        Text(
                           'I can help with spending analysis,\nbudget tips, and more',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 13, color: AppTheme.textHint),
+                          style: TextStyle(fontSize: 13, color: AppTheme.textHintC(context)),
                         ),
                       ],
                     ),
@@ -111,7 +111,7 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
                               children: [
                                 const CupertinoActivityIndicator(radius: 8),
                                 const SizedBox(width: 8),
-                                Text('Thinking...', style: TextStyle(fontSize: 13, color: AppTheme.textHint)),
+                                Text('Thinking...', style: TextStyle(fontSize: 13, color: AppTheme.textHintC(context))),
                               ],
                             ),
                           ),
@@ -131,7 +131,7 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
                           ),
                           padding: const EdgeInsets.all(14),
                           decoration: BoxDecoration(
-                            color: isUser ? AppTheme.primary : AppTheme.surface,
+                            color: isUser ? AppTheme.primary : AppTheme.surfaceC(context),
                             borderRadius: BorderRadius.only(
                               topLeft: const Radius.circular(16),
                               topRight: const Radius.circular(16),
@@ -152,7 +152,7 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
                             msg.content,
                             style: TextStyle(
                               fontSize: 14,
-                              color: isUser ? Colors.white : AppTheme.textPrimary,
+                              color: isUser ? Colors.white : AppTheme.textPrimaryC(context),
                               height: 1.4,
                             ),
                           ),
@@ -173,7 +173,7 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
           Container(
             padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
             decoration: BoxDecoration(
-              color: AppTheme.surface,
+              color: AppTheme.surfaceC(context),
               boxShadow: [BoxShadow(color: AppTheme.cardShadowLight, blurRadius: 8, offset: const Offset(0, -2))],
             ),
             child: SafeArea(

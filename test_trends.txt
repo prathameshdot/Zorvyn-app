@@ -1,0 +1,1 @@
+﻿{"success":true,"statusCode":200,"message":"Expense trends retrieved successfully","data":[]}

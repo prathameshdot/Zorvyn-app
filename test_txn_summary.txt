@@ -1,0 +1,1 @@
+﻿{"success":true,"statusCode":200,"message":"Summary retrieved successfully","data":{"income":{"total":0,"count":0},"expenses":{"total":0,"count":0},"balance":0}}

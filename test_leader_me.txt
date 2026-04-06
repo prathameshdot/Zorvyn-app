@@ -1,0 +1,1 @@
+﻿{"success":true,"statusCode":200,"message":"Success","data":{"rank":4,"totalUsers":19,"score":39,"maxScore":100,"breakdown":{"savingsRate":{"score":36,"max":40,"value":90},"goalCompletion":{"score":0,"max":25,"completed":0,"total":0},"budgetDiscipline":{"score":0,"max":20,"within":0,"total":0},"consistency":{"score":3,"max":15,"transactions":2}},"totalSavings":4500}}

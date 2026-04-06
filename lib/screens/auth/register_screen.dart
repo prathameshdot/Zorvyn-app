@@ -43,15 +43,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     setState(() => _loading = false);
     if (error != null) {
       showAppSnackBar(context, error, isError: true);
-    } else {
-      context.go('/home');
     }
+    // Router redirect handles navigation to /home on auth state change
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -64,12 +63,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 CupertinoButton(
                   padding: EdgeInsets.zero,
                   onPressed: () => context.pop(),
-                  child: const Icon(CupertinoIcons.back, color: AppTheme.textPrimary),
+                  child: Icon(CupertinoIcons.back, color: AppTheme.textPrimaryC(context)),
                 ),
                 const SizedBox(height: 24),
-                const Text('Create Account', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+                Text('Create Account', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: AppTheme.textPrimaryC(context))),
                 const SizedBox(height: 8),
-                const Text('Start your financial journey', style: TextStyle(color: AppTheme.textSecondary)),
+                Text('Start your financial journey', style: TextStyle(color: AppTheme.textSecondaryC(context))),
                 const SizedBox(height: 32),
                 ClayTextField(
                   controller: _nameCtrl,
@@ -100,7 +99,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   obscureText: _obscure,
                   suffix: GestureDetector(
                     onTap: () => setState(() => _obscure = !_obscure),
-                    child: Icon(_obscure ? CupertinoIcons.eye : CupertinoIcons.eye_slash, color: AppTheme.textHint, size: 20),
+                    child: Icon(_obscure ? CupertinoIcons.eye : CupertinoIcons.eye_slash, color: AppTheme.textHintC(context), size: 20),
                   ),
                   validator: (v) {
                     if (v == null || v.isEmpty) return 'Password is required';
@@ -130,7 +129,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Already have an account? ', style: TextStyle(color: AppTheme.textSecondary)),
+                    Text('Already have an account? ', style: TextStyle(color: AppTheme.textSecondaryC(context))),
                     CupertinoButton(
                       padding: EdgeInsets.zero,
                       minimumSize: Size.zero,

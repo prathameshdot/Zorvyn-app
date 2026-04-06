@@ -32,7 +32,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final txState = ref.watch(transactionNotifierProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: () async {
@@ -56,16 +56,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         const SizedBox(height: 10),
                         Text(
                           'Hello, ${auth.user?.name ?? 'there'}!',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w700,
-                            color: AppTheme.textPrimary,
+                            color: AppTheme.textPrimaryC(context),
                           ),
                         ),
                         const SizedBox(height: 4),
-                        const Text(
+                        Text(
                           'Your financial overview',
-                          style: TextStyle(color: AppTheme.textSecondary, fontSize: 14),
+                          style: TextStyle(color: AppTheme.textSecondaryC(context), fontSize: 14),
                         ),
                       ],
                     ),
@@ -76,7 +76,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: AppTheme.clayCard(radius: 14),
-                            child: const Icon(CupertinoIcons.bell, size: 20, color: AppTheme.textSecondary),
+                            child: Icon(CupertinoIcons.bell, size: 20, color: AppTheme.textSecondaryC(context)),
                           ),
                         ),
                       ],
@@ -180,14 +180,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 Text(
                                   tx.category.replaceAll('_', ' ').toUpperCase().substring(0, 1) +
                                       tx.category.replaceAll('_', ' ').substring(1),
-                                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AppTheme.textPrimary),
+                                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AppTheme.textPrimaryC(context)),
                                 ),
                                 if (tx.description != null && tx.description!.isNotEmpty)
                                   Text(
                                     tx.description!,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(fontSize: 12, color: AppTheme.textHint),
+                                    style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context)),
                                   ),
                               ],
                             ),
@@ -343,7 +343,7 @@ class _QuickAction extends StatelessWidget {
               Text(
                 label,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: AppTheme.textSecondary),
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: AppTheme.textSecondaryC(context)),
               ),
             ],
           ),
@@ -377,7 +377,7 @@ class _ExploreCard extends StatelessWidget {
               child: Icon(icon, size: 22, color: color),
             ),
             const SizedBox(width: 12),
-            Text(label, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AppTheme.textPrimary)),
+            Expanded(child: Text(label, overflow: TextOverflow.ellipsis, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AppTheme.textPrimaryC(context)))),
           ],
         ),
       ),

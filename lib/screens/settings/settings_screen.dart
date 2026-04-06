@@ -85,7 +85,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final auth = ref.watch(authStateProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(title: const Text('More')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -106,7 +106,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     ),
                     alignment: Alignment.center,
                     child: Text(
-                      (auth.user?.name ?? 'U')[0].toUpperCase(),
+                      ((auth.user?.name ?? '').isEmpty ? 'U' : auth.user!.name[0]).toUpperCase(),
                       style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
                     ),
                   ),
@@ -115,12 +115,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(auth.user?.name ?? 'User', style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 17, color: AppTheme.textPrimary)),
-                        Text(auth.user?.email ?? '', style: const TextStyle(fontSize: 13, color: AppTheme.textHint)),
+                        Text(auth.user?.name ?? 'User', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17, color: AppTheme.textPrimaryC(context))),
+                        Text(auth.user?.email ?? '', style: TextStyle(fontSize: 13, color: AppTheme.textHintC(context))),
                       ],
                     ),
                   ),
-                  const Icon(CupertinoIcons.chevron_right, color: AppTheme.textHint, size: 18),
+                  Icon(CupertinoIcons.chevron_right, color: AppTheme.textHintC(context), size: 18),
                 ],
               ),
             ),
@@ -177,7 +177,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   );
                   if (!confirmed) return;
                   await ref.read(authNotifierProvider.notifier).logout();
-                  if (context.mounted) context.go('/login');
                 },
                 child: const Text('Logout', style: TextStyle(color: AppTheme.accent, fontWeight: FontWeight.w600)),
               ),
@@ -196,11 +195,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 );
                 if (!confirmed) return;
                 await ref.read(authNotifierProvider.notifier).deleteAccount();
-                if (context.mounted) context.go('/login');
               },
-              child: const Text(
+              child: Text(
                 'Delete Account',
-                style: TextStyle(color: AppTheme.textHint, fontSize: 13, decoration: TextDecoration.underline),
+                style: TextStyle(color: AppTheme.textHintC(context), fontSize: 13, decoration: TextDecoration.underline),
               ),
             ),
           ],
@@ -231,13 +229,13 @@ class _Section extends StatelessWidget {
                   children: [
                     Icon(item.icon, size: 20, color: AppTheme.primary),
                     const SizedBox(width: 14),
-                    Expanded(child: Text(item.title, style: const TextStyle(fontSize: 15, color: AppTheme.textPrimary))),
-                    item.trailing ?? const Icon(CupertinoIcons.chevron_right, color: AppTheme.textHint, size: 16),
+                    Expanded(child: Text(item.title, style: TextStyle(fontSize: 15, color: AppTheme.textPrimaryC(context)))),
+                    item.trailing ?? Icon(CupertinoIcons.chevron_right, color: AppTheme.textHintC(context), size: 16),
                   ],
                 ),
               ),
               if (!isLast)
-                const Divider(height: 0, indent: 50, color: AppTheme.divider),
+                Divider(height: 0, indent: 50, color: AppTheme.dividerC(context)),
             ],
           );
         }).toList(),

@@ -34,7 +34,7 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
     final state = ref.watch(transactionNotifierProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(
         title: const Text('Transactions'),
         actions: [
@@ -63,7 +63,7 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       decoration: BoxDecoration(
-                        color: isActive ? AppTheme.primary : AppTheme.surface,
+                        color: isActive ? AppTheme.primary : AppTheme.surfaceC(context),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: isActive
                             ? null
@@ -72,7 +72,7 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
                       child: Text(
                         type[0].toUpperCase() + type.substring(1),
                         style: TextStyle(
-                          color: isActive ? Colors.white : AppTheme.textSecondary,
+                          color: isActive ? Colors.white : AppTheme.textSecondaryC(context),
                           fontWeight: FontWeight.w600,
                           fontSize: 13,
                         ),
@@ -126,13 +126,13 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                tx.category[0].toUpperCase() + tx.category.substring(1).replaceAll('_', ' '),
-                                                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AppTheme.textPrimary),
+                                                tx.category.isEmpty ? 'Uncategorized' : tx.category[0].toUpperCase() + tx.category.substring(1).replaceAll('_', ' '),
+                                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AppTheme.textPrimaryC(context)),
                                               ),
                                               if (tx.description != null && tx.description!.isNotEmpty)
-                                                Text(tx.description!, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                                                Text(tx.description!, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                                               if (tx.date != null)
-                                                Text(tx.date!.split('T').first, style: const TextStyle(fontSize: 11, color: AppTheme.textHint)),
+                                                Text(tx.date!.split('T').first, style: TextStyle(fontSize: 11, color: AppTheme.textHintC(context))),
                                             ],
                                           ),
                                         ),

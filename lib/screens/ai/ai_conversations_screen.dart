@@ -14,7 +14,7 @@ class AiConversationsScreen extends ConsumerWidget {
     final conversations = ref.watch(aiConversationsProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(
         title: const Text('AI Chat'),
         actions: [
@@ -107,16 +107,16 @@ class AiConversationsScreen extends ConsumerWidget {
                                   conv.preview,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AppTheme.textPrimary),
+                                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AppTheme.textPrimaryC(context)),
                                 ),
                                 Text(
                                   '${conv.messages.length} messages',
-                                  style: const TextStyle(fontSize: 12, color: AppTheme.textHint),
+                                  style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context)),
                                 ),
                               ],
                             ),
                           ),
-                          const Icon(CupertinoIcons.chevron_right, size: 16, color: AppTheme.textHint),
+                          Icon(CupertinoIcons.chevron_right, size: 16, color: AppTheme.textHintC(context)),
                         ],
                       ),
                     ),

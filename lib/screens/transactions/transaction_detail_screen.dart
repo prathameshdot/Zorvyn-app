@@ -15,7 +15,7 @@ class TransactionDetailScreen extends ConsumerWidget {
     final detail = ref.watch(transactionDetailProvider(transactionId));
 
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(
         title: const Text('Transaction Details'),
         actions: [
@@ -105,15 +105,15 @@ class TransactionDetailScreen extends ConsumerWidget {
               ClayCard(
                 child: Column(
                   children: [
-                    _DetailRow(label: 'Category', value: tx.category[0].toUpperCase() + tx.category.substring(1)),
-                    const Divider(height: 24, color: AppTheme.divider),
+                    _DetailRow(label: 'Category', value: tx.category.isEmpty ? 'Uncategorized' : tx.category[0].toUpperCase() + tx.category.substring(1)),
+                    Divider(height: 24, color: AppTheme.dividerC(context)),
                     _DetailRow(label: 'Description', value: tx.description ?? 'No description'),
                     if (tx.date != null) ...[
-                      const Divider(height: 24, color: AppTheme.divider),
+                      Divider(height: 24, color: AppTheme.dividerC(context)),
                       _DetailRow(label: 'Date', value: tx.date!.split('T').first),
                     ],
                     if (tx.createdAt != null) ...[
-                      const Divider(height: 24, color: AppTheme.divider),
+                      Divider(height: 24, color: AppTheme.dividerC(context)),
                       _DetailRow(label: 'Created', value: tx.createdAt!.split('T').first),
                     ],
                   ],
@@ -137,9 +137,9 @@ class _DetailRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: const TextStyle(color: AppTheme.textSecondary, fontSize: 14)),
+        Text(label, style: TextStyle(color: AppTheme.textSecondaryC(context), fontSize: 14)),
         Flexible(
-          child: Text(value, style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimary, fontSize: 14), textAlign: TextAlign.end),
+          child: Text(value, style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context), fontSize: 14), textAlign: TextAlign.end),
         ),
       ],
     );

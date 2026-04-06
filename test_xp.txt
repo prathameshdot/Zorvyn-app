@@ -1,0 +1,1 @@
+﻿{"success":true,"statusCode":200,"message":"XP data retrieved","data":{"totalXp":0,"level":1,"xpInCurrentLevel":0,"xpToNextLevel":500,"progressToNextLevel":0,"challengesCompleted":0,"title":"Finance Rookie 🌱"}}

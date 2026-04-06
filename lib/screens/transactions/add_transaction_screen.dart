@@ -96,7 +96,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(title: Text(_isEdit ? 'Edit Transaction' : 'Add Transaction')),
       body: LoadingOverlay(
         isLoading: _isLoading,
@@ -134,7 +134,7 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                               t[0].toUpperCase() + t.substring(1),
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                color: isActive ? Colors.white : AppTheme.textSecondary,
+                                color: isActive ? Colors.white : AppTheme.textSecondaryC(context),
                               ),
                             ),
                           ),
@@ -176,15 +176,15 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Category', style: TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                              Text('Category', style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                               Text(
                                 _category[0].toUpperCase() + _category.substring(1).replaceAll('_', ' '),
-                                style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimary),
+                                style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context)),
                               ),
                             ],
                           ),
                         ),
-                        const Icon(CupertinoIcons.chevron_down, size: 16, color: AppTheme.textHint),
+                        Icon(CupertinoIcons.chevron_down, size: 16, color: AppTheme.textHintC(context)),
                       ],
                     ),
                   ),
@@ -203,15 +203,15 @@ class _AddTransactionScreenState extends ConsumerState<AddTransactionScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                     child: Row(
                       children: [
-                        const Icon(CupertinoIcons.calendar, size: 20, color: AppTheme.textHint),
+                        Icon(CupertinoIcons.calendar, size: 20, color: AppTheme.textHintC(context)),
                         const SizedBox(width: 12),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Date', style: TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                            Text('Date', style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                             Text(
                               DateFormat('MMM dd, yyyy').format(_date),
-                              style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimary),
+                              style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context)),
                             ),
                           ],
                         ),

@@ -19,7 +19,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(title: const Text('Challenges')),
       body: Column(
         children: [
@@ -38,7 +38,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen> {
                       margin: EdgeInsets.only(right: entry.key == 0 ? 8 : 0),
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
-                        color: isActive ? AppTheme.primary : AppTheme.surface,
+                        color: isActive ? AppTheme.primary : AppTheme.surfaceC(context),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: isActive
                             ? null
@@ -47,7 +47,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen> {
                       alignment: Alignment.center,
                       child: Text(
                         entry.value,
-                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: isActive ? Colors.white : AppTheme.textSecondary),
+                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: isActive ? Colors.white : AppTheme.textSecondaryC(context)),
                       ),
                     ),
                   ),
@@ -92,8 +92,8 @@ class _XpHeader extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Level ${data.level}', style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: AppTheme.textPrimary)),
-                        Text('${data.xp} XP · ${data.tier}', style: const TextStyle(fontSize: 11, color: AppTheme.textHint)),
+                        Text('Level ${data.level}', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: AppTheme.textPrimaryC(context))),
+                        Text('${data.xp} XP · ${data.tier}', style: TextStyle(fontSize: 11, color: AppTheme.textHintC(context))),
                       ],
                     ),
                   ],
@@ -119,8 +119,8 @@ class _XpHeader extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('${data.currentStreak} days', style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: AppTheme.textPrimary)),
-                        Text('Best: ${data.longestStreak}', style: const TextStyle(fontSize: 11, color: AppTheme.textHint)),
+                        Text('${data.currentStreak} days', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: AppTheme.textPrimaryC(context))),
+                        Text('Best: ${data.longestStreak}', style: TextStyle(fontSize: 11, color: AppTheme.textHintC(context))),
                       ],
                     ),
                   ],
@@ -174,15 +174,15 @@ class _AvailableTab extends ConsumerWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(c.name, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppTheme.textPrimary)),
-                                  Text('${c.duration} days · ${c.xpReward} XP', style: const TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                                  Text(c.name, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppTheme.textPrimaryC(context))),
+                                  Text('${c.duration} days · ${c.xpReward} XP', style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                                 ],
                               ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 10),
-                        Text(c.description, style: const TextStyle(fontSize: 13, color: AppTheme.textSecondary, height: 1.3)),
+                        Text(c.description, style: TextStyle(fontSize: 13, color: AppTheme.textSecondaryC(context), height: 1.3)),
                         const SizedBox(height: 14),
                         SizedBox(
                           width: double.infinity,
@@ -245,9 +245,9 @@ class _MyTab extends ConsumerWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(uc.name ?? 'Challenge', style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppTheme.textPrimary)),
+                                  Text(uc.name ?? 'Challenge', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppTheme.textPrimaryC(context))),
                                   if (uc.description != null && uc.description!.isNotEmpty)
-                                    Text(uc.description!, style: const TextStyle(fontSize: 12, color: AppTheme.textHint), maxLines: 1, overflow: TextOverflow.ellipsis),
+                                    Text(uc.description!, style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context)), maxLines: 1, overflow: TextOverflow.ellipsis),
                                 ],
                               ),
                             ),
@@ -262,7 +262,7 @@ class _MyTab extends ConsumerWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
-                                uc.status[0].toUpperCase() + uc.status.substring(1),
+                                uc.status.isEmpty ? 'Unknown' : uc.status[0].toUpperCase() + uc.status.substring(1),
                                 style: TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w600,
@@ -278,7 +278,7 @@ class _MyTab extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(6),
                           child: LinearProgressIndicator(
                             value: uc.progressPercent,
-                            backgroundColor: AppTheme.divider,
+                            backgroundColor: AppTheme.dividerC(context),
                             color: uc.progressPercent >= 1.0 ? AppTheme.success : AppTheme.primary,
                             minHeight: 8,
                           ),
@@ -286,7 +286,7 @@ class _MyTab extends ConsumerWidget {
                         const SizedBox(height: 6),
                         Text(
                           '${uc.progress} / ${uc.target} days (${(uc.progressPercent * 100).toStringAsFixed(0)}%)',
-                          style: const TextStyle(fontSize: 12, color: AppTheme.textSecondary),
+                          style: TextStyle(fontSize: 12, color: AppTheme.textSecondaryC(context)),
                         ),
                         if (uc.status == 'active') ...[
                           const SizedBox(height: 12),

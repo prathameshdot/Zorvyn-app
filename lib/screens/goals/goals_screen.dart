@@ -25,7 +25,7 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen> {
     final state = ref.watch(goalNotifierProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(
         title: const Text('Goals'),
         actions: [
@@ -79,11 +79,11 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen> {
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Text(goal.name, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppTheme.textPrimary)),
+                                            Text(goal.name, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppTheme.textPrimaryC(context))),
                                             const SizedBox(height: 2),
                                             Text(
                                               goal.goalType.replaceAll('_', ' '),
-                                              style: const TextStyle(fontSize: 12, color: AppTheme.textHint),
+                                              style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context)),
                                             ),
                                           ],
                                         ),
@@ -97,7 +97,7 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen> {
                                           borderRadius: BorderRadius.circular(10),
                                         ),
                                         child: Text(
-                                          goal.status[0].toUpperCase() + goal.status.substring(1),
+                                          goal.status.isEmpty ? 'Unknown' : goal.status[0].toUpperCase() + goal.status.substring(1),
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w600,
@@ -112,7 +112,7 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen> {
                                     borderRadius: BorderRadius.circular(6),
                                     child: LinearProgressIndicator(
                                       value: progress.clamp(0.0, 1.0),
-                                      backgroundColor: AppTheme.divider,
+                                      backgroundColor: AppTheme.dividerC(context),
                                       color: progress >= 1.0 ? AppTheme.success : AppTheme.primary,
                                       minHeight: 8,
                                     ),
@@ -123,7 +123,7 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen> {
                                     children: [
                                       Text(
                                         '${formatAmount(goal.currentAmount)} / ${formatAmount(goal.targetAmount)}',
-                                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: AppTheme.textSecondary),
+                                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: AppTheme.textSecondaryC(context)),
                                       ),
                                       Text(
                                         '${(progress * 100).toStringAsFixed(0)}%',

@@ -1,0 +1,1 @@
+﻿{"success":true,"statusCode":200,"message":"Spending patterns retrieved successfully","data":{"averageDailyExpense":0,"averageDailyIncome":0,"mostActiveDay":null,"mostActiveCategory":null,"dayOfWeekPatterns":{},"categoryFrequency":{}}}

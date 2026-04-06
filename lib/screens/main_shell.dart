@@ -57,8 +57,8 @@ class MainShell extends ConsumerWidget {
         ],
       ),
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          color: AppTheme.surface,
+        decoration: BoxDecoration(
+          color: AppTheme.surfaceC(context),
           boxShadow: [
             BoxShadow(color: AppTheme.cardShadowLight, offset: Offset(0, -2), blurRadius: 12),
           ],
@@ -141,7 +141,7 @@ class _NavItem extends StatelessWidget {
             Icon(
               isActive ? activeIcon : icon,
               size: 24,
-              color: isActive ? AppTheme.primary : AppTheme.textHint,
+              color: isActive ? AppTheme.primary : AppTheme.textHintC(context),
             ),
             const SizedBox(height: 4),
             Text(
@@ -149,7 +149,7 @@ class _NavItem extends StatelessWidget {
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
-                color: isActive ? AppTheme.primary : AppTheme.textHint,
+                color: isActive ? AppTheme.primary : AppTheme.textHintC(context),
               ),
             ),
           ],

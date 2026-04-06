@@ -20,7 +20,7 @@ class _TipsScreenState extends ConsumerState<TipsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(title: const Text('Financial Tips')),
       body: Column(
         children: [
@@ -37,7 +37,7 @@ class _TipsScreenState extends ConsumerState<TipsScreen> {
                       margin: EdgeInsets.only(right: entry.key < 2 ? 8 : 0),
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
-                        color: isActive ? AppTheme.primary : AppTheme.surface,
+                        color: isActive ? AppTheme.primary : AppTheme.surfaceC(context),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: isActive
                             ? null
@@ -49,7 +49,7 @@ class _TipsScreenState extends ConsumerState<TipsScreen> {
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 13,
-                          color: isActive ? Colors.white : AppTheme.textSecondary,
+                          color: isActive ? Colors.white : AppTheme.textSecondaryC(context),
                         ),
                       ),
                     ),
@@ -161,7 +161,7 @@ class _TipCard extends ConsumerWidget {
                 Expanded(
                   child: Text(
                     tip.title,
-                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppTheme.textPrimary),
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: AppTheme.textPrimaryC(context)),
                   ),
                 ),
                 CupertinoButton(
@@ -198,13 +198,13 @@ class _TipCard extends ConsumerWidget {
                   child: Icon(
                     tip.bookmarked ? CupertinoIcons.bookmark_fill : CupertinoIcons.bookmark,
                     size: 20,
-                    color: tip.bookmarked ? AppTheme.primary : AppTheme.textHint,
+                    color: tip.bookmarked ? AppTheme.primary : AppTheme.textHintC(context),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 10),
-            Text(tip.content, style: const TextStyle(fontSize: 14, color: AppTheme.textSecondary, height: 1.4)),
+            Text(tip.content, style: TextStyle(fontSize: 14, color: AppTheme.textSecondaryC(context), height: 1.4)),
             if (tip.category != null) ...[
               const SizedBox(height: 10),
               Container(

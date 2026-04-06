@@ -19,7 +19,7 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(title: const Text('Insights')),
       body: Column(
         children: [
@@ -36,7 +36,7 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen> {
                       margin: EdgeInsets.only(right: entry.key < 3 ? 8 : 0),
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
-                        color: isActive ? AppTheme.primary : AppTheme.surface,
+                        color: isActive ? AppTheme.primary : AppTheme.surfaceC(context),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: isActive
                             ? null
@@ -48,7 +48,7 @@ class _InsightsScreenState extends ConsumerState<InsightsScreen> {
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 13,
-                          color: isActive ? Colors.white : AppTheme.textSecondary,
+                          color: isActive ? Colors.white : AppTheme.textSecondaryC(context),
                         ),
                       ),
                     ),
@@ -140,15 +140,15 @@ class _OverviewTab extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              cat.category[0].toUpperCase() + cat.category.substring(1),
-                              style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimary),
+                              cat.category.isEmpty ? 'Uncategorized' : cat.category[0].toUpperCase() + cat.category.substring(1),
+                              style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context)),
                             ),
                             const SizedBox(height: 4),
                             ClipRRect(
                               borderRadius: BorderRadius.circular(4),
                               child: LinearProgressIndicator(
                                 value: (cat.percentage / 100).clamp(0.0, 1.0),
-                                backgroundColor: AppTheme.divider,
+                                backgroundColor: AppTheme.dividerC(context),
                                 color: getCategoryColor(cat.category),
                                 minHeight: 4,
                               ),
@@ -160,8 +160,8 @@ class _OverviewTab extends ConsumerWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(formatAmount(cat.amount), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: AppTheme.textPrimary)),
-                          Text('${cat.percentage.toStringAsFixed(1)}%', style: const TextStyle(fontSize: 11, color: AppTheme.textHint)),
+                          Text(formatAmount(cat.amount), style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: AppTheme.textPrimaryC(context))),
+                          Text('${cat.percentage.toStringAsFixed(1)}%', style: TextStyle(fontSize: 11, color: AppTheme.textHintC(context))),
                         ],
                       ),
                     ],
@@ -220,7 +220,7 @@ class _HealthTab extends ConsumerWidget {
                             child: CircularProgressIndicator(
                               value: data.score / 100,
                               strokeWidth: 10,
-                              backgroundColor: AppTheme.divider,
+                              backgroundColor: AppTheme.dividerC(context),
                               color: scoreColor,
                               strokeCap: StrokeCap.round,
                             ),
@@ -232,7 +232,7 @@ class _HealthTab extends ConsumerWidget {
                                 data.score.toString(),
                                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: scoreColor),
                               ),
-                              Text(data.grade, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
+                              Text(data.grade, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppTheme.textSecondaryC(context))),
                             ],
                           ),
                         ],
@@ -261,11 +261,11 @@ class _HealthTab extends ConsumerWidget {
                       children: [
                         Text(
                           entry.key.replaceAll('_', ' '),
-                          style: const TextStyle(color: AppTheme.textSecondary, fontSize: 14),
+                          style: TextStyle(color: AppTheme.textSecondaryC(context), fontSize: 14),
                         ),
                         Text(
                           entry.value.toString(),
-                          style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimary, fontSize: 14),
+                          style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context), fontSize: 14),
                         ),
                       ],
                     ),
@@ -303,9 +303,9 @@ class _PatternsTab extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Average Daily Spending', style: TextStyle(color: AppTheme.textSecondary)),
+                    Text('Average Daily Spending', style: TextStyle(color: AppTheme.textSecondaryC(context))),
                     const SizedBox(height: 4),
-                    Text(formatAmount(data.avgDailyExpense), style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+                    Text(formatAmount(data.avgDailyExpense), style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: AppTheme.textPrimaryC(context))),
                   ],
                 ),
               ),
@@ -316,7 +316,7 @@ class _PatternsTab extends ConsumerWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Peak Spending Day', style: TextStyle(color: AppTheme.textSecondary)),
+                    Text('Peak Spending Day', style: TextStyle(color: AppTheme.textSecondaryC(context))),
                     Text(data.mostActiveDay, style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.primary)),
                   ],
                 ),
@@ -334,21 +334,21 @@ class _PatternsTab extends ConsumerWidget {
                     children: [
                       SizedBox(
                         width: 80,
-                        child: Text(dp.day, style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+                        child: Text(dp.day, style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context))),
                       ),
                       Expanded(
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(4),
                           child: LinearProgressIndicator(
                             value: data.dayPatterns.isEmpty ? 0 : (dp.amount / data.dayPatterns.map((p) => p.amount).reduce((a, b) => a > b ? a : b)).clamp(0.0, 1.0),
-                            backgroundColor: AppTheme.divider,
+                            backgroundColor: AppTheme.dividerC(context),
                             color: AppTheme.primary,
                             minHeight: 6,
                           ),
                         ),
                       ),
                       const SizedBox(width: 12),
-                      Text(formatAmount(dp.amount), style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: AppTheme.textPrimary)),
+                      Text(formatAmount(dp.amount), style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: AppTheme.textPrimaryC(context))),
                     ],
                   ),
                 ),
@@ -389,7 +389,7 @@ class _TrendsTab extends ConsumerWidget {
                   padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
-                      const Text('Total Expenses', style: TextStyle(fontSize: 13, color: AppTheme.textSecondary)),
+                      Text('Total Expenses', style: TextStyle(fontSize: 13, color: AppTheme.textSecondaryC(context))),
                       const SizedBox(height: 6),
                       Text(
                         '\$$totalExpenses',
@@ -403,7 +403,7 @@ class _TrendsTab extends ConsumerWidget {
               if (summary != null && summary.isNotEmpty) ...[
                 ClayCard(
                   padding: const EdgeInsets.all(16),
-                  child: Text(summary, style: const TextStyle(fontSize: 14, color: AppTheme.textSecondary, height: 1.5)),
+                  child: Text(summary, style: TextStyle(fontSize: 14, color: AppTheme.textSecondaryC(context), height: 1.5)),
                 ),
                 const SizedBox(height: 20),
               ],
@@ -429,21 +429,21 @@ class _TrendsTab extends ConsumerWidget {
                         children: [
                           SizedBox(
                             width: 70,
-                            child: Text(month, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+                            child: Text(month, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context))),
                           ),
                           Expanded(
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(4),
                               child: LinearProgressIndicator(
                                 value: maxAmount > 0 ? (amountNum / maxAmount).clamp(0.0, 1.0) : 0,
-                                backgroundColor: AppTheme.divider,
+                                backgroundColor: AppTheme.dividerC(context),
                                 color: AppTheme.accent,
                                 minHeight: 6,
                               ),
                             ),
                           ),
                           const SizedBox(width: 12),
-                          Text(formatAmount(amountNum), style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+                          Text(formatAmount(amountNum), style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context))),
                         ],
                       ),
                     ),
@@ -459,7 +459,7 @@ class _TrendsTab extends ConsumerWidget {
                         .where((e) => e.key != 'success')
                         .map((e) => Padding(
                               padding: const EdgeInsets.only(bottom: 4),
-                              child: Text('${e.key}: ${e.value}', style: const TextStyle(fontSize: 13, color: AppTheme.textSecondary)),
+                              child: Text('${e.key}: ${e.value}', style: TextStyle(fontSize: 13, color: AppTheme.textSecondaryC(context))),
                             ))
                         .toList(),
                   ),
@@ -495,7 +495,7 @@ class _StatCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(label, style: const TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                Text(label, style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                 Text(formatAmount(amount), style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: color)),
               ],
             ),

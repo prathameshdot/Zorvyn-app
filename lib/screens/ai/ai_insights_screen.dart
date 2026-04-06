@@ -18,7 +18,7 @@ class _AiInsightsScreenState extends ConsumerState<AiInsightsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(title: const Text('AI Insights')),
       body: Column(
         children: [
@@ -35,7 +35,7 @@ class _AiInsightsScreenState extends ConsumerState<AiInsightsScreen> {
                       margin: EdgeInsets.only(right: entry.key < 2 ? 8 : 0),
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
-                        color: isActive ? AppTheme.primary : AppTheme.surface,
+                        color: isActive ? AppTheme.primary : AppTheme.surfaceC(context),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: isActive
                             ? null
@@ -47,7 +47,7 @@ class _AiInsightsScreenState extends ConsumerState<AiInsightsScreen> {
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 13,
-                          color: isActive ? Colors.white : AppTheme.textSecondary,
+                          color: isActive ? Colors.white : AppTheme.textSecondaryC(context),
                         ),
                       ),
                     ),
@@ -111,13 +111,13 @@ class _AnalysisTab extends ConsumerWidget {
                       child: const Icon(CupertinoIcons.chart_bar_fill, size: 24, color: AppTheme.secondary),
                     ),
                     const SizedBox(width: 16),
-                    const Expanded(
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Spending Analysis', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+                          Text('Spending Analysis', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppTheme.textPrimaryC(context))),
                           SizedBox(height: 2),
-                          Text('AI-powered breakdown of your habits', style: TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                          Text('AI-powered breakdown of your habits', style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                         ],
                       ),
                     ),
@@ -130,7 +130,7 @@ class _AnalysisTab extends ConsumerWidget {
               if (summary != null && summary.isNotEmpty) ...[
                 ClayCard(
                   padding: const EdgeInsets.all(16),
-                  child: Text(summary, style: const TextStyle(fontSize: 14, color: AppTheme.textSecondary, height: 1.5)),
+                  child: Text(summary, style: TextStyle(fontSize: 14, color: AppTheme.textSecondaryC(context), height: 1.5)),
                 ),
                 const SizedBox(height: 20),
               ],
@@ -208,16 +208,16 @@ class _PredictTab extends ConsumerWidget {
                       child: const Icon(CupertinoIcons.sparkles, size: 32, color: AppTheme.primary),
                     ),
                     const SizedBox(height: 14),
-                    const Text('Predicted Next Month', style: TextStyle(fontSize: 14, color: AppTheme.textSecondary)),
+                    Text('Predicted Next Month', style: TextStyle(fontSize: 14, color: AppTheme.textSecondaryC(context))),
                     const SizedBox(height: 4),
                     if (predictedExpense != null)
                       Text(
                         '\$$predictedExpense',
-                        style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: AppTheme.textPrimary),
+                        style: TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: AppTheme.textPrimaryC(context)),
                       ),
                     if (confidence != null) ...[
                       const SizedBox(height: 4),
-                      Text('Confidence: $confidence', style: const TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                      Text('Confidence: $confidence', style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                     ],
                   ],
                 ),
@@ -228,7 +228,7 @@ class _PredictTab extends ConsumerWidget {
               if (message != null && message.isNotEmpty) ...[
                 ClayCard(
                   padding: const EdgeInsets.all(16),
-                  child: Text(message, style: const TextStyle(fontSize: 14, color: AppTheme.textSecondary, height: 1.5)),
+                  child: Text(message, style: TextStyle(fontSize: 14, color: AppTheme.textSecondaryC(context), height: 1.5)),
                 ),
                 const SizedBox(height: 20),
               ],
@@ -247,13 +247,13 @@ class _PredictTab extends ConsumerWidget {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            e.key[0].toUpperCase() + e.key.substring(1),
-                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppTheme.textPrimary),
+                            e.key.isEmpty ? 'Other' : e.key[0].toUpperCase() + e.key.substring(1),
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppTheme.textPrimaryC(context)),
                           ),
                         ),
                         Text(
                           '\$${e.value}',
-                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppTheme.textPrimary),
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context)),
                         ),
                       ],
                     ),
@@ -314,12 +314,12 @@ class _OptimizeTab extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Budget Optimization', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+                          Text('Budget Optimization', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppTheme.textPrimaryC(context))),
                           const SizedBox(height: 2),
                           if (potentialSavings != null)
                             Text('Potential savings: \$$potentialSavings', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.success))
                           else
-                            const Text('AI-powered budget recommendations', style: TextStyle(fontSize: 12, color: AppTheme.textHint)),
+                            Text('AI-powered budget recommendations', style: TextStyle(fontSize: 12, color: AppTheme.textHintC(context))),
                         ],
                       ),
                     ),
@@ -332,7 +332,7 @@ class _OptimizeTab extends ConsumerWidget {
               if (summary != null && summary.isNotEmpty) ...[
                 ClayCard(
                   padding: const EdgeInsets.all(16),
-                  child: Text(summary, style: const TextStyle(fontSize: 14, color: AppTheme.textSecondary, height: 1.5)),
+                  child: Text(summary, style: TextStyle(fontSize: 14, color: AppTheme.textSecondaryC(context), height: 1.5)),
                 ),
                 const SizedBox(height: 20),
               ],
@@ -393,7 +393,7 @@ class _InsightCard extends StatelessWidget {
               Icon(icon, size: 18, color: color),
             const SizedBox(width: 12),
             Expanded(
-              child: Text(text, style: const TextStyle(fontSize: 13, color: AppTheme.textSecondary, height: 1.5)),
+              child: Text(text, style: TextStyle(fontSize: 13, color: AppTheme.textSecondaryC(context), height: 1.5)),
             ),
           ],
         ),
@@ -419,7 +419,7 @@ class _RawDataCard extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 6),
                   child: Text(
                     '${e.key}: ${e.value}',
-                    style: const TextStyle(fontSize: 13, color: AppTheme.textSecondary, height: 1.4),
+                    style: TextStyle(fontSize: 13, color: AppTheme.textSecondaryC(context), height: 1.4),
                   ),
                 ))
             .toList(),

@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zorvyn/config/constants.dart';
 import 'package:zorvyn/config/exceptions.dart';
@@ -32,6 +34,56 @@ class ApiService {
         handler.next(error);
       },
     ));
+
+    // Verbose API logging — prints method, URL, headers, payload, and response
+    _dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        debugPrint('┌───────────────────────────────────────────');
+        debugPrint('│ → ${options.method} ${options.uri}');
+        debugPrint('│ Headers: ${options.headers}');
+        if (options.data != null) {
+          try {
+            final encoded = const JsonEncoder.withIndent('  ').convert(options.data);
+            debugPrint('│ Body: $encoded');
+          } catch (_) {
+            debugPrint('│ Body: ${options.data}');
+          }
+        }
+        if (options.queryParameters.isNotEmpty) {
+          debugPrint('│ Query: ${options.queryParameters}');
+        }
+        debugPrint('└───────────────────────────────────────────');
+        handler.next(options);
+      },
+      onResponse: (response, handler) {
+        debugPrint('┌───────────────────────────────────────────');
+        debugPrint('│ ← ${response.statusCode} ${response.requestOptions.method} ${response.requestOptions.uri}');
+        try {
+          final encoded = const JsonEncoder.withIndent('  ').convert(response.data);
+          debugPrint('│ Response: $encoded');
+        } catch (_) {
+          debugPrint('│ Response: ${response.data}');
+        }
+        debugPrint('└───────────────────────────────────────────');
+        handler.next(response);
+      },
+      onError: (error, handler) {
+        debugPrint('┌─── ERROR ─────────────────────────────────');
+        debugPrint('│ ✖ ${error.requestOptions.method} ${error.requestOptions.uri}');
+        debugPrint('│ Status: ${error.response?.statusCode ?? 'N/A'}');
+        if (error.response?.data != null) {
+          try {
+            final encoded = const JsonEncoder.withIndent('  ').convert(error.response!.data);
+            debugPrint('│ Error body: $encoded');
+          } catch (_) {
+            debugPrint('│ Error body: ${error.response!.data}');
+          }
+        }
+        debugPrint('│ Message: ${error.message}');
+        debugPrint('└───────────────────────────────────────────');
+        handler.next(error);
+      },
+    ));
   }
 
   String _cacheKey(String path, Map<String, dynamic>? queryParams) {
@@ -44,19 +96,22 @@ class ApiService {
     return buffer.toString();
   }
 
-  // Generic response handler
+  // Generic response handler — unwraps the { success, data } envelope
   dynamic _handleResponse(Response response) {
-    final data = response.data;
-    if (data is Map<String, dynamic>) {
-      if (data['success'] == false) {
+    final body = response.data;
+    if (body is Map<String, dynamic>) {
+      if (body['success'] == false) {
         throw AppException(
-          data['message']?.toString() ?? 'Something went wrong. Please try again.',
+          body['message']?.toString() ?? 'Something went wrong. Please try again.',
           statusCode: response.statusCode,
         );
       }
-      return data;
+      // Unwrap: return inner `data` map if present, otherwise the full body
+      final inner = body['data'];
+      if (inner is Map<String, dynamic>) return inner;
+      return body;
     }
-    return data;
+    return body;
   }
 
   // Generic error handler

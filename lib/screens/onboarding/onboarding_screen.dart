@@ -72,7 +72,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       body: SafeArea(
         child: Column(
           children: [
@@ -81,7 +81,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               alignment: Alignment.topRight,
               child: CupertinoButton(
                 onPressed: _finish,
-                child: const Text('Skip', style: TextStyle(color: AppTheme.textHint, fontSize: 15)),
+                child: Text('Skip', style: TextStyle(color: AppTheme.textHintC(context), fontSize: 15)),
               ),
             ),
 
@@ -111,13 +111,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Text(
                           p.title,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w700, color: AppTheme.textPrimary),
+                          style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700, color: AppTheme.textPrimaryC(context)),
                         ),
                         const SizedBox(height: 16),
                         Text(
                           p.subtitle,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 15, color: AppTheme.textSecondary, height: 1.5),
+                          style: TextStyle(fontSize: 15, color: AppTheme.textSecondaryC(context), height: 1.5),
                         ),
                       ],
                     ),
@@ -139,7 +139,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     height: 8,
                     margin: const EdgeInsets.symmetric(horizontal: 4),
                     decoration: BoxDecoration(
-                      color: i == _page ? AppTheme.primary : AppTheme.divider,
+                      color: i == _page ? AppTheme.primary : AppTheme.dividerC(context),
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),

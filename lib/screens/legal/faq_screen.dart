@@ -122,21 +122,21 @@ class _FaqScreenState extends State<FaqScreen> {
     int globalIdx = 0;
 
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(title: const Text('FAQ')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Frequently Asked Questions',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: AppTheme.textPrimary),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: AppTheme.textPrimaryC(context)),
             ),
             const SizedBox(height: 4),
-            const Text(
+            Text(
               'Find answers to common questions about Zorvyn.',
-              style: TextStyle(fontSize: 14, color: AppTheme.textSecondary),
+              style: TextStyle(fontSize: 14, color: AppTheme.textSecondaryC(context)),
             ),
             const SizedBox(height: 24),
             ..._sections.map((section) {
@@ -168,17 +168,17 @@ class _FaqScreenState extends State<FaqScreen> {
                                     Expanded(
                                       child: Text(
                                         item.q,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
-                                          color: AppTheme.textPrimary,
+                                          color: AppTheme.textPrimaryC(context),
                                         ),
                                       ),
                                     ),
                                     Icon(
                                       isOpen ? CupertinoIcons.chevron_up : CupertinoIcons.chevron_down,
                                       size: 16,
-                                      color: AppTheme.textHint,
+                                      color: AppTheme.textHintC(context),
                                     ),
                                   ],
                                 ),
@@ -186,7 +186,7 @@ class _FaqScreenState extends State<FaqScreen> {
                                   const SizedBox(height: 10),
                                   Text(
                                     item.a,
-                                    style: const TextStyle(fontSize: 13, color: AppTheme.textSecondary, height: 1.5),
+                                    style: TextStyle(fontSize: 13, color: AppTheme.textSecondaryC(context), height: 1.5),
                                   ),
                                 ],
                               ],

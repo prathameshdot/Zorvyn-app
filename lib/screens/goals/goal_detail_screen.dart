@@ -45,7 +45,7 @@ class _GoalDetailScreenState extends ConsumerState<GoalDetailScreen> {
     final detail = ref.watch(goalDetailProvider(widget.goalId));
 
     return Scaffold(
-      backgroundColor: AppTheme.bg,
+      backgroundColor: AppTheme.bgC(context),
       appBar: AppBar(
         title: const Text('Goal Details'),
         actions: [
@@ -104,18 +104,18 @@ class _GoalDetailScreenState extends ConsumerState<GoalDetailScreen> {
                         child: const Icon(CupertinoIcons.flag_fill, size: 36, color: AppTheme.primary),
                       ),
                       const SizedBox(height: 14),
-                      Text(goal.name, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+                      Text(goal.name, style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: AppTheme.textPrimaryC(context))),
                       const SizedBox(height: 8),
                       Text(
                         '${formatAmount(goal.currentAmount)} of ${formatAmount(goal.targetAmount)}',
-                        style: const TextStyle(fontSize: 15, color: AppTheme.textSecondary),
+                        style: TextStyle(fontSize: 15, color: AppTheme.textSecondaryC(context)),
                       ),
                       const SizedBox(height: 16),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: LinearProgressIndicator(
                           value: progress.clamp(0.0, 1.0),
-                          backgroundColor: AppTheme.divider,
+                          backgroundColor: AppTheme.dividerC(context),
                           color: progress >= 1.0 ? AppTheme.success : AppTheme.primary,
                           minHeight: 10,
                         ),
@@ -140,17 +140,17 @@ class _GoalDetailScreenState extends ConsumerState<GoalDetailScreen> {
                     children: [
                       _Row(label: 'Type', value: goal.goalType.replaceAll('_', ' ')),
                       if (goal.priority != null) ...[
-                        const Divider(height: 24, color: AppTheme.divider),
+                        Divider(height: 24, color: AppTheme.dividerC(context)),
                         _Row(label: 'Priority', value: goal.priority!),
                       ],
-                      const Divider(height: 24, color: AppTheme.divider),
+                      Divider(height: 24, color: AppTheme.dividerC(context)),
                       _Row(label: 'Status', value: goal.status),
                       if (goal.deadline != null) ...[
-                        const Divider(height: 24, color: AppTheme.divider),
+                        Divider(height: 24, color: AppTheme.dividerC(context)),
                         _Row(label: 'Deadline', value: goal.deadline!.split('T').first),
                       ],
                       if (goal.description != null && goal.description!.isNotEmpty) ...[
-                        const Divider(height: 24, color: AppTheme.divider),
+                        Divider(height: 24, color: AppTheme.dividerC(context)),
                         _Row(label: 'Description', value: goal.description!),
                       ],
                     ],
@@ -204,11 +204,11 @@ class _Row extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: const TextStyle(color: AppTheme.textSecondary, fontSize: 14)),
+        Text(label, style: TextStyle(color: AppTheme.textSecondaryC(context), fontSize: 14)),
         Flexible(
           child: Text(
-            value[0].toUpperCase() + value.substring(1),
-            style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimary, fontSize: 14),
+            value.isEmpty ? '' : value[0].toUpperCase() + value.substring(1),
+            style: TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textPrimaryC(context), fontSize: 14),
             textAlign: TextAlign.end,
           ),
         ),

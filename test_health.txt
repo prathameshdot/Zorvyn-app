@@ -1,0 +1,1 @@
+﻿{"success":true,"statusCode":200,"message":"Financial health retrieved successfully","data":{"score":50,"grade":"F","status":"Fair","details":{"incomeExpenseRatio":0,"goalsProgress":0,"budgetAdherence":0}}}
